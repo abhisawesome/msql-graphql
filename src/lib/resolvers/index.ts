@@ -1,8 +1,18 @@
+import { models } from '../../db';
+
+const { UsersModel } = models;
+
+interface paramModel {
+    id: Number
+}
+
 export default {
-    getAllUsers: () => {
-        return [
-            { id: 1, name: 'one', username: '1', password: 'pass' },
-            { id: 2, name: 'two', username: '2', password: 'pass' }
-        ]
+    getAllUsers: async () => {
+        const userResponse = await UsersModel.query().select();
+        return userResponse;
+    },
+    getUserById: async ({ id }: paramModel) => {
+        const userResponse = await UsersModel.query().select().findOne({ id: id });
+        return userResponse
     }
 }

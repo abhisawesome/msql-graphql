@@ -1,4 +1,4 @@
-import { GraphQLObjectType, GraphQLSchema, GraphQLList } from "graphql";
+import { GraphQLObjectType, GraphQLSchema, GraphQLList, GraphQLInt } from "graphql";
 import { UserType } from '../types';
 
 const RootQuery = new GraphQLObjectType({
@@ -7,6 +7,15 @@ const RootQuery = new GraphQLObjectType({
     getAllUsers: {
       type: new GraphQLList(UserType)
     },
+    getUserById: {
+      type: UserType,
+      args: {
+        id: {
+          type: GraphQLInt
+        }
+      }
+
+    }
   },
 });
 
