@@ -1,6 +1,6 @@
 import express from 'express';
 import { graphqlHTTP } from 'express-graphql';
-import { schema } from '../../lib';
+import { schema, resolvers } from '../../lib';
 
 
 const router = express.Router();
@@ -8,7 +8,8 @@ const router = express.Router();
 
 router.use('/graphql', graphqlHTTP({
     schema,
-    graphiql: true
+    graphiql: true,
+    rootValue: resolvers
 }))
 
 
