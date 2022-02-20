@@ -14,5 +14,14 @@ export default {
     getUserById: async ({ id }: paramModel) => {
         const userResponse = await UsersModel.query().select().findOne({ id: id });
         return userResponse
+    },
+    insertNewUser: async (parms:any) => {
+        const { name, username, password } = parms;
+        const userResponse = await UsersModel.query().insert({
+            password,
+            name,
+            username
+        })
+        return null
     }
 }

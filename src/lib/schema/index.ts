@@ -1,4 +1,4 @@
-import { GraphQLObjectType, GraphQLSchema, GraphQLList, GraphQLInt } from "graphql";
+import { GraphQLObjectType, GraphQLSchema, GraphQLList, GraphQLInt, GraphQLString } from "graphql";
 import { UserType } from '../types';
 
 const RootQuery = new GraphQLObjectType({
@@ -19,7 +19,28 @@ const RootQuery = new GraphQLObjectType({
   },
 });
 
+const MutationQuery = new GraphQLObjectType({
+  name: "Mutation",
+  fields: {
+    insertNewUser: {
+      type: UserType,
+      args: {
+        name: {
+          type: GraphQLString
+        },
+        username: {
+          type: GraphQLString
+        },
+        password:{
+          type: GraphQLString
+        }
+      }
+    }
+
+  }
+})
 
 export const schema = new GraphQLSchema({
-  query: RootQuery
+  query: RootQuery,
+  mutation: MutationQuery
 });
