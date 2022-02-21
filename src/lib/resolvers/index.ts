@@ -1,3 +1,4 @@
+import { PartialModelObject } from 'objection';
 import { models } from '../../db';
 
 const { UsersModel } = models;
@@ -17,11 +18,13 @@ export default {
     },
     insertNewUser: async (parms:any) => {
         const { name, username, password } = parms;
-        const userResponse = await UsersModel.query().insert({
+        const input = {
             password,
             name,
             username
-        })
-        return null
+        }
+        // @ts-ignore
+        const userResponse = await UsersModel.query().insert(input);
+        return userResponse
     }
 }
