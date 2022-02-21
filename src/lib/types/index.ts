@@ -1,6 +1,8 @@
 import { UserType } from './user';
-
+import { SalaryType,SalaryWithUser } from './Salary'
 
 export {
-    UserType
+    UserType,
+    SalaryType,
+    SalaryWithUser
 }

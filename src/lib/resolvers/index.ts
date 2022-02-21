@@ -1,7 +1,7 @@
 import { PartialModelObject } from 'objection';
 import { models } from '../../db';
 
-const { UsersModel } = models;
+const { UsersModel, SalaryModel } = models;
 
 interface paramModel {
     id: Number
@@ -16,7 +16,7 @@ export default {
         const userResponse = await UsersModel.query().select().findOne({ id: id });
         return userResponse
     },
-    insertNewUser: async (parms:any) => {
+    insertNewUser: async (parms: any) => {
         const { name, username, password } = parms;
         const input = {
             password,
@@ -26,5 +26,18 @@ export default {
         // @ts-ignore
         const userResponse = await UsersModel.query().insert(input);
         return userResponse
+    },
+    getSalary: async (params: any) => {
+        const userResponse = await UsersModel.query()
+            .select()
+            .findOne({ id: params.userId });
+        const salaryResponse:any = await SalaryModel.query()
+            .select()
+            .findOne({ user_id: params.userId });
+        return {
+            id: salaryResponse?.id,
+            users: userResponse,
+            salary: salaryResponse
+        }
     }
 }

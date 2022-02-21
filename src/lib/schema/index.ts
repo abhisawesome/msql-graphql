@@ -1,5 +1,5 @@
 import { GraphQLObjectType, GraphQLSchema, GraphQLList, GraphQLInt, GraphQLString } from "graphql";
-import { UserType } from '../types';
+import { UserType,SalaryWithUser } from '../types';
 
 const RootQuery = new GraphQLObjectType({
   name: "RootQuery",
@@ -15,6 +15,14 @@ const RootQuery = new GraphQLObjectType({
         }
       }
 
+    },
+    getSalary:{
+      type: SalaryWithUser,
+      args:{
+        userId:{
+          type: GraphQLInt
+        }
+      }
     }
   },
 });
